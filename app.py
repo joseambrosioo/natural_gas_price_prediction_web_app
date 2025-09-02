@@ -72,6 +72,7 @@ external_stylesheets = [
 
 app = Dash(__name__, external_stylesheets=external_stylesheets)
 app.title = "Natural Gas Price Prediction Dashboard"
+server = app.server # This exposes the Flask server object to Gunicorn
 
 # Define the dashboard layout
 app.layout = html.Div(style={'backgroundColor': '#F0F2F5', 'color': '#333333'}, children=[
@@ -164,6 +165,10 @@ def update_model_performance(tab_name):
         )
         return fig, metrics_text
     return {}, []
+
+
+server = app.server # This exposes the Flask server object to Gunicorn
+
 
 if __name__ == '__main__':
     app.run(debug=True)
